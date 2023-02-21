@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import moment from "moment"
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<!DOCTYPE html>
+<head> </head>
+<PageLayout title="Blog" description="All posts here! Welcome to my blog.">
+  <section>
+    <ul>
+      {
+        posts.map((post) => (
+          <li  class="py-2">
+            <p class="text-zinc-500 text-sm">
+			{moment(post.data.pubDate).format('ll')}
+      </p>
+            <a href={`/blog/${post.slug}/`} class="hover:underline inline-block py-1">{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</PageLayout>

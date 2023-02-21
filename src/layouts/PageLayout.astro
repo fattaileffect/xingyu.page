@@ -1,0 +1,12 @@
+---
+import PageSEO from "../components/PageSEO.astro";
+import Layout from "./Layout.astro";
+const { title, description } = Astro.props;
+---
+
+<head>
+  <PageSEO title={title} description={description} />
+</head>
+<Layout>
+  <slot />
+</Layout>

@@ -1,0 +1,13 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { getEntryBySlug } from 'astro:content';
+const Index = await  getEntryBySlug("page",'index');
+const { Content } = await Index.render();
+---
+
+<PageLayout {...Index.data}>
+
+  <article class="prose mt-4">
+    <Content />
+  </article>
+</PageLayout>

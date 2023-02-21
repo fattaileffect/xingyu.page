@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+import moment from "moment";
+import Layout from "./Layout.astro";
+import BlogSEO from "../components/BlogSEO.astro";
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+---
+
+<BlogSEO title={title} description={description} />
+<Layout>
+  <article>
+    <h1 class="text-3xl font-semibold font-serif py-6">{title}</h1>
+    {moment(pubDate).format("ll")}
+    {
+      updatedDate && (
+        <div class="last-updated-on">
+          Last updated on {moment(updatedDate).format("ll")}
+        </div>
+      )
+    }
+    <hr class="my-4" />
+    <slot />
+  </article>
+  <script src="https://giscus.app/client.js"
+        data-repo="fattaileffect/xingyu.page"
+        data-repo-id="R_kgDOJAitTw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJAitT84CUWYk"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</Layout>
